@@ -9,6 +9,12 @@ public class GrapplingScript : MonoBehaviour {
     private float maxDistance = 50f;
     private SpringJoint joint;
      private bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
+     
+     // Impulso
+     private float grappleForce = 20f;
+     private bool isDrawingImpulse; // Variable para rastrear si se está dibujando el gancho
+     private float drawTimer = 0.5f; // Duración del tiempo de dibujo en segundos
+    private float currentDrawTime; // Tiempo actual transcurrido de dibujo
 
     void Awake() {
         lr = GetComponent<LineRenderer>();
@@ -16,11 +22,31 @@ public class GrapplingScript : MonoBehaviour {
 
     void Update() {
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             StartGrapple();
         }
-        else if (Input.GetMouseButtonUp(0)) {
+        else if (Input.GetKeyUp(KeyCode.Q)) {
             StopGrapple();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)) {
+            StartImpulse();
+            StartDrawingImpulse();
+        }
+        else if (Input.GetKeyUp(KeyCode.F)) {
+            StopDrawingImpulse();
+        }
+
+        // Si se está dibujando el gancho, actualizar el temporizador
+        if (isDrawingImpulse)
+        {
+            currentDrawTime += Time.deltaTime;
+
+            // Si el temporizador alcanza la duración deseada, detener el dibujo del gancho
+            if (currentDrawTime >= drawTimer)
+            {
+                StopDrawingImpulse();
+            }
         }
 
         CheckCanGrapple();
@@ -74,6 +100,43 @@ public class GrapplingScript : MonoBehaviour {
         }
     }
 
+    // impulso con la cuerda
+    void StartImpulse() {
+        RaycastHit hit;
+        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) {
+            grapplePoint = hit.point;
+
+            // Calcula la dirección desde el jugador al punto de enganche
+            Vector3 grappleDirection = (grapplePoint - player.position).normalized;
+
+            // Aplica un impulso al jugador en la dirección del enganche
+            player.GetComponent<Rigidbody>().AddForce(grappleDirection * grappleForce, ForceMode.Impulse);
+            
+            // Dibujar el gancho
+            DrawGrip();
+        }
+    }
+
+    void DrawGrip()
+    {
+        lr.positionCount = 2;
+        lr.SetPosition(0, gunTip.position);
+        lr.SetPosition(1, grapplePoint);
+    }
+
+    // Función para comenzar a dibujar el gancho
+    void StartDrawingImpulse()
+    {
+        isDrawingImpulse = true;
+        currentDrawTime = 0f; // Reiniciar el temporizador
+    }
+
+    // Función para detener el dibujo del gancho
+    void StopDrawingImpulse()
+    {
+        isDrawingImpulse = false;
+        lr.positionCount = 0; // Borrar la línea del gancho
+    }
 
     /// <summary>
     /// Call whenever we want to stop a grapple
