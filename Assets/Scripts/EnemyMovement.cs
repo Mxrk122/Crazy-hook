@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public Transform player;
     private NavMeshAgent agent;
     public float angleOffset = 45.0f;
-    [SerializeField] private float timer = 5;
+    [SerializeField] private float timer = 2;
     private float bulletTime;
     public GameObject enemyBullet;
     public Transform spawnpoint;
@@ -35,7 +32,6 @@ public class EnemyMovement : MonoBehaviour
         // Interpolate between current rotation and target rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5.0f);
         ShootAtPlayer();
-
     }
 
     void ShootAtPlayer()
@@ -46,12 +42,14 @@ public class EnemyMovement : MonoBehaviour
 
         bulletTime = timer;
 
-        GameObject bulletObj = Instantiate(enemyBullet, spawnpoint.transform.position, spawnpoint.transform.rotation) as GameObject;
+        // Calculate direction towards the player
+        Vector3 directionToPlayer = (player.position - spawnpoint.transform.position).normalized;
+
+        // Instantiate bullet
+        GameObject bulletObj = Instantiate(enemyBullet, spawnpoint.transform.position, Quaternion.LookRotation(directionToPlayer)) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce(bulletRig.transform.forward * enemySpeed);
-        bulletRig.AddForce(bulletRig.transform.right * -300);
 
+        // Add force in the direction towards the player
+        bulletRig.AddForce(directionToPlayer * enemySpeed);
     }
-
-
 }
