@@ -6,12 +6,13 @@ public class GrapplingScript : MonoBehaviour {
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, camera, player;
-    private float maxDistance = 50f;
+    public float maxDistance = 20f;
     private SpringJoint joint;
      private bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
      
      // Impulso
-     private float grappleForce = 20f;
+     public float impulseForce = 50f;
+     public float impulseDistance = 10f;
      private bool isDrawingImpulse; // Variable para rastrear si se está dibujando el gancho
      private float drawTimer = 0.5f; // Duración del tiempo de dibujo en segundos
     private float currentDrawTime; // Tiempo actual transcurrido de dibujo
@@ -103,14 +104,14 @@ public class GrapplingScript : MonoBehaviour {
     // impulso con la cuerda
     void StartImpulse() {
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) {
+        if (Physics.Raycast(camera.position, camera.forward, out hit, impulseDistance, whatIsGrappleable)) {
             grapplePoint = hit.point;
 
             // Calcula la dirección desde el jugador al punto de enganche
             Vector3 grappleDirection = (grapplePoint - player.position).normalized;
 
             // Aplica un impulso al jugador en la dirección del enganche
-            player.GetComponent<Rigidbody>().AddForce(grappleDirection * grappleForce, ForceMode.Impulse);
+            player.GetComponent<Rigidbody>().AddForce(grappleDirection * impulseForce, ForceMode.Impulse);
             
             // Dibujar el gancho
             DrawGrip();
