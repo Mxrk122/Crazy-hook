@@ -1,40 +1,57 @@
 using UnityEngine;
 
-public class GrapplingScript : MonoBehaviour {
+public class GrapplingScript : MonoBehaviour
+{
 
     private LineRenderer lr;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
+    public LayerMask whatIsGrappaleable2;
+    private LayerMask combinedMask;
+
     public Transform gunTip, camera, player;
     public float maxDistance = 20f;
     private SpringJoint joint;
-     private bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
-     
-     // Impulso
-     public float impulseForce = 50f;
-     public float impulseDistance = 10f;
-     private bool isDrawingImpulse; // Variable para rastrear si se está dibujando el gancho
-     private float drawTimer = 0.5f; // Duración del tiempo de dibujo en segundos
+    private bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
+
+    // Impulso
+    public float impulseForce = 50f;
+    public float impulseDistance = 10f;
+    private bool isDrawingImpulse; // Variable para rastrear si se está dibujando el gancho
+    private float drawTimer = 0.5f; // Duración del tiempo de dibujo en segundos
     private float currentDrawTime; // Tiempo actual transcurrido de dibujo
 
-    void Awake() {
+    void Awake()
+    {
+        combinedMask = whatIsGrappleable | whatIsGrappaleable2;
         lr = GetComponent<LineRenderer>();
     }
 
-    void Update() {
+    void Start()
+    {
+        // Assuming lr is your LineRenderer component
+        lr.positionCount = 2; // Set the number of positions to 2
+    }
 
-        if (Input.GetKeyDown(KeyCode.Q)) {
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             StartGrapple();
         }
-        else if (Input.GetKeyUp(KeyCode.Q)) {
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
             StopGrapple();
         }
 
-        if (Input.GetKeyDown(KeyCode.F)) {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
             StartImpulse();
             StartDrawingImpulse();
         }
-        else if (Input.GetKeyUp(KeyCode.F)) {
+        else if (Input.GetKeyUp(KeyCode.F))
+        {
             StopDrawingImpulse();
         }
 
@@ -57,7 +74,8 @@ public class GrapplingScript : MonoBehaviour {
     void CheckCanGrapple()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
+
+        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, combinedMask))
         {
             canGrapple = true; // El objeto es grappleable
             Debug.Log("Se puede");
@@ -70,16 +88,19 @@ public class GrapplingScript : MonoBehaviour {
     }
 
     //Called after Update
-    void LateUpdate() {
+    void LateUpdate()
+    {
         DrawRope();
     }
 
     /// <summary>
     /// Call whenever we want to start a grapple
     /// </summary>
-    void StartGrapple() {
+    void StartGrapple()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) {
+        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, combinedMask))
+        {
             grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
@@ -102,9 +123,11 @@ public class GrapplingScript : MonoBehaviour {
     }
 
     // impulso con la cuerda
-    void StartImpulse() {
+    void StartImpulse()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, impulseDistance, whatIsGrappleable)) {
+        if (Physics.Raycast(camera.position, camera.forward, out hit, impulseDistance, combinedMask))
+        {
             grapplePoint = hit.point;
 
             // Calcula la dirección desde el jugador al punto de enganche
@@ -112,7 +135,7 @@ public class GrapplingScript : MonoBehaviour {
 
             // Aplica un impulso al jugador en la dirección del enganche
             player.GetComponent<Rigidbody>().AddForce(grappleDirection * impulseForce, ForceMode.Impulse);
-            
+
             // Dibujar el gancho
             DrawGrip();
         }
@@ -142,28 +165,36 @@ public class GrapplingScript : MonoBehaviour {
     /// <summary>
     /// Call whenever we want to stop a grapple
     /// </summary>
-    void StopGrapple() {
+    void StopGrapple()
+    {
         lr.positionCount = 0;
         Destroy(joint);
     }
 
     private Vector3 currentGrapplePosition;
-    
-    void DrawRope() {
+
+    void DrawRope()
+    {
         //If not grappling, don't draw rope
-        if (!joint) return;
+        if (!joint || !lr) return;
 
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
-        
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
+
+        // Make sure lr has at least 2 positions
+        if (lr.positionCount >= 2)
+        {
+            lr.SetPosition(0, gunTip.position);
+            lr.SetPosition(1, currentGrapplePosition);
+        }
     }
 
-    public bool IsGrappling() {
+    public bool IsGrappling()
+    {
         return joint != null;
     }
 
-    public Vector3 GetGrapplePoint() {
+    public Vector3 GetGrapplePoint()
+    {
         return grapplePoint;
     }
 }
