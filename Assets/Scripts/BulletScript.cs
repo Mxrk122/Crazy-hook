@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class BulletScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject respawnPoint; // Assign the respawn point GameObject in the Unity Editor
+    public GameObject gameOverUI; // Reference to the game over UI GameObject
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-            Debug.Log(":)");
+            // Deactivate the player GameObject
+            Time.timeScale = 0f;
+
+
+
+            FindObjectOfType<GameManager>().EndGame();
+            // Show the game over UI
+            gameOverUI.SetActive(true);
+
         }
     }
+
 }

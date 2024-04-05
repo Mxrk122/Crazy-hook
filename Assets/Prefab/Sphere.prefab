@@ -146,3 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f8156227506cd48b1f6ae0114b4be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 820917702989362693, guid: 324b7f978c43f9048a16676947285a5e, type: 3}
+  gameOverUI: {fileID: 1239641724717663971, guid: cf3c0b57a15e66c45b1887ece2774c04, type: 3}
+  mainCamera: {fileID: 8376471797853291439, guid: d075415fe96448d4c8a5bc31f3a77fd9, type: 3}
