@@ -78,12 +78,12 @@ public class GrapplingScript : MonoBehaviour
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, combinedMask))
         {
             canGrapple = true; // El objeto es grappleable
-            Debug.Log("Se puede");
+            // Debug.Log("Se puede");
         }
         else
         {
             canGrapple = false; // El objeto no es grappleable
-            Debug.Log("No se puede");
+            // Debug.Log("No se puede");
         }
     }
 

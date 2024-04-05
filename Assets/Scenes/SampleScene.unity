@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 299289969}
   - component: {fileID: 299289968}
   - component: {fileID: 299289967}
+  - component: {fileID: 299289974}
   - component: {fileID: 299289972}
   - component: {fileID: 299289973}
   m_Layer: 0
@@ -655,6 +656,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d898b7f74934b4b8f47260b122175e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &299289974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299289966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc7e62de2c9b4b498daa81278e791d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 963194227}
+  attackDistance: 3
+  attackDelay: 0.4
+  attackSpeed: 1
+  attackDamage: 1
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  hitEffect: {fileID: 0}
+  swordSwing: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!1 &348221501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,6 +2546,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1790165319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1239641724717663971, guid: cf3c0b57a15e66c45b1887ece2774c04, type: 3}
+  m_PrefabInstance: {fileID: 6006947113590643018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1870144586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,6 +2713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ce635de46ac7b42aa8093bdca206e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverCanvas: {fileID: 1790165319}
+  gameOverSound: {fileID: 0}
 --- !u!4 &1904648329
 Transform:
   m_ObjectHideFlags: 0
