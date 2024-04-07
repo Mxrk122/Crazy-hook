@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Camera cam;
+    public EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +71,9 @@ public class PlayerAttack : MonoBehaviour
             // Accede al GameObject impactado
             GameObject objectHit = hit.transform.gameObject;
             // Llama a la función Destroy para destruir el GameObject
+            enemyManager.EnemyDied(objectHit);
             Destroy(objectHit);
+            
 
         } 
     }

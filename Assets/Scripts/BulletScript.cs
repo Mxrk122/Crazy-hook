@@ -21,6 +21,9 @@ public class BulletScript : MonoBehaviour
             gameOverUI.SetActive(true);
 
         }
+        else{
+            Destroy(gameObject);
+        }
     }
 
 }

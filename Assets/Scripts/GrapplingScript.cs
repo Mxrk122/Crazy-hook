@@ -36,21 +36,21 @@ public class GrapplingScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetMouseButtonDown(0))
         {
             StartGrapple();
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        else if (Input.GetMouseButtonUp(0))
         {
             StopGrapple();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(1))
         {
             StartImpulse();
             StartDrawingImpulse();
         }
-        else if (Input.GetKeyUp(KeyCode.F))
+        else if (Input.GetMouseButtonUp(1))
         {
             StopDrawingImpulse();
         }
