@@ -6,10 +6,14 @@ public class PlayerAttack : MonoBehaviour
 {
     public Camera cam;
     public EnemyManager enemyManager;
+    public BulletScript bulletScript;
+
+    private bool isParrying = false;
+    private int parryFrames = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,6 +23,25 @@ public class PlayerAttack : MonoBehaviour
         {
             AttackRaycast();
         }
+
+        if (Input.GetKeyDown(KeyCode.P) && !isParrying)
+        {
+            isParrying = true;
+            parryFrames = 3; // Set the parry frames to 5
+            bulletScript.EnableParry();
+        }
+
+        if (isParrying && parryFrames > 0)
+        {
+            parryFrames--;
+        }
+
+        if (parryFrames == 0)
+        {
+            isParrying = false;
+            bulletScript.DisableParry();
+        }
+
     }
 
     public float attackDistance = 5f;
@@ -37,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        if(!readyToAttack || attacking) return;
+        if (!readyToAttack || attacking) return;
 
         readyToAttack = false;
         attacking = true;
@@ -64,8 +87,8 @@ public class PlayerAttack : MonoBehaviour
     }
     void AttackRaycast()
     {
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
-        { 
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
             //HitTarget(hit.point);
 
             // Accede al GameObject impactado
@@ -73,9 +96,9 @@ public class PlayerAttack : MonoBehaviour
             // Llama a la función Destroy para destruir el GameObject
             enemyManager.EnemyDied(objectHit);
             Destroy(objectHit);
-            
 
-        } 
+
+        }
     }
 
     void HitTarget(Vector3 pos)
