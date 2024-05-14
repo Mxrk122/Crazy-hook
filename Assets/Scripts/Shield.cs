@@ -10,10 +10,13 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log(":)");
             shield.SetActive(true);
             Destroy(gameObject);
+
         }
     }
 }
