@@ -30,8 +30,6 @@ public class BulletScript : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     Destroy(gameObject);
-                    GameObject shieldUI = GameObject.Find("ShieldUI");
-                    shieldUI.SetActive(false);
                 }
                 else
                 {
