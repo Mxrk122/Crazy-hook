@@ -6,14 +6,24 @@ public class Shield : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject shield;
+    public GameObject shieldUI;
 
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+<<<<<<< Updated upstream
             shield.SetActive(true);
             Destroy(gameObject);
+=======
+            Debug.Log(this.gameObject.tag);
+            shield.SetActive(true);
+            GameObject foundObject = GameObject.Find("PowerUpContainerDoubleShine");
+            shieldUI.SetActive(true);
+            Destroy(foundObject);
+
+>>>>>>> Stashed changes
         }
     }
 }
