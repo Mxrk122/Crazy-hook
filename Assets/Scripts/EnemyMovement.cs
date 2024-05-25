@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject enemyBullet;
     public Transform spawnpoint;
     public float enemySpeed;
+    public float detectionRange = 100f; // Adjust this to your desired detection range
 
     void Start()
     {
@@ -22,16 +23,25 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.destination = player.position;
-        // Calculate the direction vector towards the player
-        Vector3 direction = (player.position - transform.position).normalized;
+        // Calculate the distance to the player
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Calculate the target rotation with the offset angle
-        Quaternion targetRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, angleOffset, 0);
+        // If player is within detection range, move towards the player and shoot
+        if (distanceToPlayer <= detectionRange)
+        {
+            agent.destination = player.position;
 
-        // Interpolate between current rotation and target rotation
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5.0f);
-        ShootAtPlayer();
+            // Calculate the direction vector towards the player
+            Vector3 direction = (player.position - transform.position).normalized;
+
+            // Calculate the target rotation with the offset angle
+            Quaternion targetRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, angleOffset, 0);
+
+            // Interpolate between current rotation and target rotation
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5.0f);
+
+            ShootAtPlayer();
+        }
     }
 
     void ShootAtPlayer()
