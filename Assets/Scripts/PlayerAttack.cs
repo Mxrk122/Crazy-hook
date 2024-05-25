@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public Camera cam;
     public EnemyManager enemyManager;
     public BulletScript bulletScript;
+    public bool canAttack;
 
     private bool isParrying = false;
     private int parryFrames = 0;
@@ -41,6 +42,8 @@ public class PlayerAttack : MonoBehaviour
             isParrying = false;
             bulletScript.DisableParry();
         }
+
+        CheckCanAttack();
 
     }
 
@@ -98,6 +101,21 @@ public class PlayerAttack : MonoBehaviour
             Destroy(objectHit);
 
 
+        }
+    }
+
+    void CheckCanAttack()
+    {
+        
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            canAttack = true; // El objeto es grappleable
+            Debug.Log(canAttack);
+        }
+        else
+        {
+            canAttack = false; // El objeto no es grappleable
+            Debug.Log(canAttack);
         }
     }
 
