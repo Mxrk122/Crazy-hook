@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
     public EnemyManager enemyManager;
     public BulletScript bulletScript;
 
+    private bool canAttack; // Propiedad booleana que indica si se puede graplear o no
+
     private bool isParrying = false;
     private int parryFrames = 0;
     // Start is called before the first frame update
@@ -19,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(0))
         {
             AttackRaycast();
         }
@@ -98,6 +100,21 @@ public class PlayerAttack : MonoBehaviour
             Destroy(objectHit);
 
 
+        }
+    }
+
+    void CheckCanAttack()
+    {
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            canAttack = true; // El objeto es grappleable
+            // Debug.Log("Se puede");
+        }
+        else
+        {
+            canAttack = false; // El objeto no es grappleable
+            // Debug.Log("No se puede");
         }
     }
 

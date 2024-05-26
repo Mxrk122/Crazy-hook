@@ -12,7 +12,8 @@ public class GrapplingScript : MonoBehaviour
     public Transform gunTip, camera, player;
     public float maxDistance = 20f;
     private SpringJoint joint;
-    private bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
+    public bool canGrapple; // Propiedad booleana que indica si se puede graplear o no
+    public bool canImpulse; // Propiedad booleana que indica si se puede graplear o no
 
     // Impulso
     public float impulseForce = 50f;
@@ -36,21 +37,21 @@ public class GrapplingScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             StartGrapple();
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(1))
         {
             StopGrapple();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             StartImpulse();
             StartDrawingImpulse();
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             StopDrawingImpulse();
         }
@@ -68,6 +69,7 @@ public class GrapplingScript : MonoBehaviour
         }
 
         CheckCanGrapple();
+        CheckCanImpulse();
     }
 
     // Verificar si el jugador puede graplear al objeto
@@ -83,6 +85,22 @@ public class GrapplingScript : MonoBehaviour
         else
         {
             canGrapple = false; // El objeto no es grappleable
+            // Debug.Log("No se puede");
+        }
+    }
+
+    void CheckCanImpulse()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(camera.position, camera.forward, out hit, impulseDistance, combinedMask))
+        {
+            canImpulse = true; // El objeto es grappleable
+            // Debug.Log("Se puede");
+        }
+        else
+        {
+            canImpulse = false; // El objeto no es grappleable
             // Debug.Log("No se puede");
         }
     }
