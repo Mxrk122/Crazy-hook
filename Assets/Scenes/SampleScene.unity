@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 365764871}
   m_Layer: 0
   m_Name: Arm.001_Cube_Robot_Arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -930,6 +930,8 @@ MonoBehaviour:
   camera: {fileID: 1892796423}
   player: {fileID: 299289971}
   maxDistance: 20
+  canGrapple: 0
+  canImpulse: 0
   impulseForce: 50
   impulseDistance: 10
 --- !u!120 &365764872
@@ -3927,6 +3929,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80aebc037a7abdb4b976d1681d8d5c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gP: {fileID: 365764869}
+  material: {fileID: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  grapColor: {r: 0, g: 1, b: 0, a: 1}
+  impulseColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &210899484173601811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4850,6 +4857,87 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &8447202025891966445
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 405416232592935390, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    - target: {fileID: 757675230327344999, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    - target: {fileID: 1346420134433022526, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_Name
+      value: limits
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177549427097376150, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -49.755173
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 35.018005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.508816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2424975323382300841, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883723346765961315, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    - target: {fileID: 7206686187402593067, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    - target: {fileID: 7829383249746867537, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 1157050357}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4d4f22a1056563468f28a73f15203fa, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4881,3 +4969,4 @@ SceneRoots:
   - {fileID: 271551621}
   - {fileID: 7396545700114629668}
   - {fileID: 998691482}
+  - {fileID: 8447202025891966445}
