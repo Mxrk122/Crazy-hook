@@ -125,10 +125,6 @@ public class PlayerAttack : MonoBehaviour
 
         GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(GO, 20);
-        if (shootSoundClip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(shootSoundClip);
-            Debug.Log("Audio :)");
-        }
+
     }
 }
