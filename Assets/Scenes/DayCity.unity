@@ -1742,7 +1742,7 @@ PrefabInstance:
     - target: {fileID: 5040871990003545973, guid: 84a880fb20bc9024ca8e0ccd2560842c, type: 3}
       propertyPath: shield
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1477261427}
     - target: {fileID: 5040871990003545973, guid: 84a880fb20bc9024ca8e0ccd2560842c, type: 3}
       propertyPath: shieldUI
       value: 
@@ -2629,6 +2629,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7456091372920771534, guid: a4d04c088db86a147a59796ac8ed3174, type: 3}
   m_PrefabInstance: {fileID: 1477261425}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1477261427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3977803538069244039, guid: a4d04c088db86a147a59796ac8ed3174, type: 3}
+  m_PrefabInstance: {fileID: 1477261425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1499569227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2709,7 +2714,7 @@ GameObject:
   - component: {fileID: 1634468955}
   - component: {fileID: 1634468954}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ShieldUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

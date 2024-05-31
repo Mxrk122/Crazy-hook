@@ -875,6 +875,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d04c088db86a147a59796ac8ed3174, type: 3}
+--- !u!1 &242016952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3977803538069244039, guid: a4d04c088db86a147a59796ac8ed3174, type: 3}
+  m_PrefabInstance: {fileID: 242016951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &245199988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2293,7 +2298,7 @@ PrefabInstance:
     - target: {fileID: 5040871990003545973, guid: 84a880fb20bc9024ca8e0ccd2560842c, type: 3}
       propertyPath: shield
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 242016952}
     - target: {fileID: 5040871990003545973, guid: 84a880fb20bc9024ca8e0ccd2560842c, type: 3}
       propertyPath: shieldUI
       value: 
@@ -5232,7 +5237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2874266781278301402, guid: fc6902a8aefc6bd4aa6d8b81ef871b7e, type: 3}
       propertyPath: m_Name
-      value: Image
+      value: ShieldUI
       objectReference: {fileID: 0}
     - target: {fileID: 2874266781278301402, guid: fc6902a8aefc6bd4aa6d8b81ef871b7e, type: 3}
       propertyPath: m_IsActive
