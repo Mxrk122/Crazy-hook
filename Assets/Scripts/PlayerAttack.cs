@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
             AttackRaycast();
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !isParrying)
+        if (Input.GetKeyDown(KeyCode.Q) && !isParrying)
         {
             isParrying = true;
             parryFrames = 3; // Set the parry frames to 5
