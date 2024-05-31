@@ -20,4 +20,9 @@ public class ChangeScenes : MonoBehaviour
     {
         SceneManager.LoadScene("DayCity");
     }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
