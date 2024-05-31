@@ -14,6 +14,8 @@ public class EnemyMovement : MonoBehaviour
     public Transform spawnpoint;
     public float enemySpeed;
     public float detectionRange = 100f; // Adjust this to your desired detection range
+    public AudioClip shootSoundClip; // Sound clip to play when shooting
+    public AudioSource audioSource; // Reference to AudioSource component
 
     void Start()
     {
@@ -61,5 +63,12 @@ public class EnemyMovement : MonoBehaviour
 
         // Add force in the direction towards the player
         bulletRig.AddForce(directionToPlayer * enemySpeed);
+        // Play shoot sound clip
+        if (shootSoundClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSoundClip);
+            Debug.Log("Audio :)");
+        }
+
     }
 }
